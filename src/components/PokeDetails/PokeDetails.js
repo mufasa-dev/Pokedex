@@ -76,9 +76,9 @@ export const PokeDetails = ({pokemon, pokedex, click, closeScreen}) => {
                 </Container>
             }
             {pokedex ? 
-                <ButtonAddRem onClick={() => {click(pokemon)}}>Remover</ButtonAddRem> 
+                <ButtonAddRem onClick={() => {click(pokemon)}}>Remove</ButtonAddRem> 
                 : 
-                <ButtonAddRem onClick={() => {click(pokemon)}}>Adicionar</ButtonAddRem>}
+                <ButtonAddRem onClick={() => {click(pokemon)}}>Add</ButtonAddRem>}
         </ContainerBody>
     )
 }

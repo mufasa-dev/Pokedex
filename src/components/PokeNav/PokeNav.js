@@ -21,6 +21,9 @@ export const PokeNav = ({setTheme}) => {
               <NavDropdown.Item onClick={() => setTheme("water")}>Water</NavDropdown.Item>
               <NavDropdown.Item onClick={() => setTheme("grass")}>Grass</NavDropdown.Item>
               <NavDropdown.Item onClick={() => setTheme("fire")}>Fire</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => setTheme("poison")}>Poison</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => setTheme("electric")}>Electic</NavDropdown.Item>
+
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

@@ -1,23 +1,27 @@
 import React, { useState } from "react";
-import { PokeList } from "./pages/PokeList/PokeList";
 import { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
 import MainRoutes from './routes';
+import usePeristedState from './utils/usePersistedState'
 
 import fire from "./styles/themes/fire";
 import water from "./styles/themes/water";
+import poison from "./styles/themes/poison"
 import { PokeNav } from "./components/PokeNav/PokeNav";
 import grass from "./styles/themes/grass";
+import electric from "./styles/themes/electric";
 
 import {store} from "./redux";
 
 const App = (props) => {
-  const [theme, setTheme] = useState("fire");
+  const [theme, setTheme] = usePeristedState("theme", "fire");
 
   const themes = {
     fire: fire,
     water: water,
-    grass: grass
+    grass: grass,
+    poison: poison,
+    electric: electric
   }
 
   return (

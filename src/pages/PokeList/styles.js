@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Modal } from "react-bootstrap";
 
 export const PokemonList = styled.div`
   position: fixed;
@@ -90,5 +91,46 @@ export const PrevNextButton = styled.div`
 
   &:hover{
     background-color: #D5A100;
+  }
+`;
+
+export const PokeNavBar = styled(Modal)`
+  color: white;
+  & .modal-content{
+    background-color: ${props => props.theme.colors.header};
+    border: 1px solid black;
+  }
+  
+  & .modal-header{
+    border-bottom: 0 !important;
+  }
+
+  & .modal-title{
+    text-transform: capitalize;
+  }
+
+  & .modal-footer{
+    border-top: 0 !important;
+  }
+`;
+
+export const ButtonAddRem = styled.button`
+  width: 100px;
+  background-color: ${props => props.theme.colors.button};
+  border-radius: 5px;
+  color: white;
+  border: 0;
+  transition: 300ms;
+  cursor: pointer;
+  padding: 5px;
+  position: initial;
+  bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  &:hover {
+    background-color: ${props => props.theme.colors.buttonHover};
+  }
+  &:disabled {
+    background-color: #343434;
   }
 `;

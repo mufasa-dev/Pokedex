@@ -15,6 +15,7 @@ import { PokeDetails } from "../../components/PokeDetails/PokeDetails";
 import ReactAudioPlayer from 'react-audio-player';
 
 let read = {};
+let cursor = {};
 
 const PokeDex = () => {
     const dispatch = useDispatch()
@@ -47,12 +48,12 @@ const PokeDex = () => {
     const detailsPokemon = (nam) => {
         let poke = pokemons.data.find(x => x.name == nam);
         setPokemon(poke)
-        read.audioEl.current.src = require('../../assets/audios/add.mp3');
+        read.audioEl.current.src = require('../../assets/audios/click.mp3');
         setOpenDetail(true);
     }
 
     const cursorSound = (poke) => {
-        read.audioEl.current.src = require('../../assets/audios/cursor.mp3');
+        cursor.audioEl.current.src = require('../../assets/audios/cursor.mp3');
     }
     
     const rmToPokeDex = (poke) => {
@@ -104,6 +105,12 @@ const PokeDex = () => {
                 </Container>
             </PokemonDetails>
             <div className="d-none">
+                <ReactAudioPlayer
+                    ref={(element) => { cursor = element; }}
+                    autoPlay
+                    controls
+                    className="audioPlayerInvisible"
+                />
                 <ReactAudioPlayer
                     ref={(element) => { read = element; }}
                     autoPlay

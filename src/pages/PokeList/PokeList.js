@@ -6,8 +6,8 @@ import { connect } from "react-redux";
 
 import { GET_POKEMONS } from "../../graphql/get-pokemons";
 import { GET_POKEMON } from "../../graphql/get-pokemon";
-import { Container, Row, Col } from "react-bootstrap";
-import { InputSearch, InputSelect, ButtonSearch, PokemonDetails, PokemonList, ContainerNextPrev, PrevNextButton } from "./styles";
+import { Container, Row, Col, Modal, Button } from "react-bootstrap";
+import { InputSearch, InputSelect, ButtonAddRem, PokeNavBar, ButtonSearch, PokemonDetails, PokemonList, ContainerNextPrev, PrevNextButton } from "./styles";
 import { PokeCard } from "../../components/PokeCard/PokeCard";
 import { fetchData } from "../../lib/fetchdata";
 import { GET_TYPES } from "../../graphql/get-types";
@@ -16,6 +16,7 @@ import { PokeDetails } from "../../components/PokeDetails/PokeDetails";
 import ReactAudioPlayer from 'react-audio-player';
 
 let read = {};
+let cursor = {};
 
 const PokeList = () => {
     const dispatch = useDispatch()
@@ -23,14 +24,13 @@ const PokeList = () => {
     const [pokemon, setPokemon] = useState({});
     const [limit, setLimit] = useState(24);
     const [offset, setOffset] = useState(0);
+    const [modalAddPoke, setModalAddPoke] = useState(false);
     const [name, setName] = useState('');
-    const [types, setTypes] = useState([]);
-    const [type, setType] = useState('');
+    const [nameSearch, setNameSearch] = useState('');
     const [openDetail, setOpenDetail] = useState(false);
 
     useEffect(() => {
         initial();
-        getTypes();
     }, [])
 
     const initial = () => {
@@ -40,13 +40,6 @@ const PokeList = () => {
             setPokemons(res ? res.pokemons.results : []);
             setOffset(0);
         }))
-    }
-
-    const getTypes = () => {
-         fetchData(GET_TYPES, { })
-         .then((res => {
-             setTypes(res ? res.types.results : [])
-         }))
     }
 
     const next = () => {
@@ -95,19 +88,17 @@ const PokeList = () => {
     }
 
     const cursorSound = (poke) => {
-        read.audioEl.current.src = require('../../assets/audios/cursor.mp3');
+        cursor.audioEl.current.src = require('../../assets/audios/cursor.mp3');
     }
     
     const addToPokeDex = (poke) => {
+        poke.name = name;
         setPokemon({})
         dispatch(ActionCreators.addPokemon(poke))
         read.audioEl.current.src = require('../../assets/audios/recruit.mp3');
         setOpenDetail(false);
+        setModalAddPoke(false)
     }
-
-    // const { data : { pokemons = [] } = {} } = useQuery(GET_POKEMONS, {
-    //     variables : { limit: 24, offset: 0}
-    // });
     
     return (
         <div>
@@ -115,19 +106,11 @@ const PokeList = () => {
             <Container mt="5">
                 
                 <Row className="mt-3 mb-3">
-                    {/* <Col sm="4">
-                        <InputSelect value={type} onChange={e =>  setType(e.target.value)} disabled>
-                            <option value="">...</option>
-                            {types && types.map((ty, i) => {
-                                return <option key={i} value={ty.name}>{ty.name}</option>
-                            })}
-                        </InputSelect>
-                    </Col> */}
                     <Col sm="8">
-                        <InputSearch placeholder="Name" value={name} onChange={e => setName(e.target.value)} disabled={type != ''} />
+                        <InputSearch placeholder="Name" value={nameSearch} onChange={e => setNameSearch(e.target.value)} />
                     </Col>
                     <Col sm="4">
-                        <ButtonSearch onClick={searchName} disabled={type != ''}>
+                        <ButtonSearch onClick={searchName} >
                             Search
                         </ButtonSearch>
                     </Col>
@@ -149,12 +132,44 @@ const PokeList = () => {
             </PokemonList>
             <PokemonDetails open={openDetail}>
                 <Container>
-                    {pokemon && pokemon.name && <PokeDetails pokemon={pokemon} click={addToPokeDex} closeScreen={() => setOpenDetail(false)} />}
+                    {pokemon && pokemon.name && <PokeDetails pokemon={pokemon} click={() => {
+                        setModalAddPoke(true);
+                        setName(pokemon.name);
+                    }} closeScreen={() => setOpenDetail(false)} />}
                 </Container>
             </PokemonDetails>
+            <PokeNavBar show={modalAddPoke} onHide={() => setModalAddPoke(false)} centered>
+                <Modal.Header closeButton>
+                <Modal.Title>{pokemon.name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Container>
+                        <Row>
+                            <Col sm="4">
+                                <img src={pokemon.sprites ? pokemon.sprites.front_default : pokemon.image} />
+                            </Col>
+                            <Col>
+                                <b>Name:</b>
+                                <InputSearch type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)}/>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                <ButtonAddRem variant="primary" onClick={() => addToPokeDex(pokemon)}>
+                    Add
+                </ButtonAddRem>
+                </Modal.Footer>
+            </PokeNavBar>
             <div className="d-none">
                 <ReactAudioPlayer
                     ref={(element) => { read = element; }}
+                    autoPlay
+                    controls
+                    className="audioPlayerInvisible"
+                />
+                <ReactAudioPlayer
+                    ref={(element) => { cursor = element; }}
                     autoPlay
                     controls
                     className="audioPlayerInvisible"
