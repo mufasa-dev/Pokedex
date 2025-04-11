@@ -1,4 +1,4 @@
-export default {
+const theme = {
     title : 'poison',
     colors : {
         background: '#a483c5',
@@ -12,3 +12,5 @@ export default {
         buttonHover: '#ab3612',
     }
 };
+
+export default theme;

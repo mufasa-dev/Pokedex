@@ -15,13 +15,13 @@ import { PokeNav } from "../../components/PokeNav/PokeNav";
 import { PokeDetails } from "../../components/PokeDetails/PokeDetails";
 import ReactAudioPlayer from 'react-audio-player';
 
-let read = {};
-let cursor = {};
+let read: ReactAudioPlayer;
+let cursor: ReactAudioPlayer;
 
 const PokeList = () => {
     const dispatch = useDispatch()
-    const [pokemons, setPokemons] = useState([]);
-    const [pokemon, setPokemon] = useState({});
+    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+    const [pokemon, setPokemon] = useState<Pokemon | null>(null);
     const [limit, setLimit] = useState(24);
     const [offset, setOffset] = useState(0);
     const [modalAddPoke, setModalAddPoke] = useState(false);
@@ -72,39 +72,39 @@ const PokeList = () => {
         }
         fetchData(GET_POKEMON, { name: name.toLocaleLowerCase()})
         .then((res => {
-            let list = []
+            let list: any[] = []
             if(res && res.pokemon){
                 list.push(res.pokemon)
                 setPokemon(res.pokemon)
             }else{
-                setPokemon({})
+                setPokemon(null)
             }
             setPokemons(list)
         }))
         .catch(err => {
             setPokemons([])
-            setPokemon({})
+            setPokemon(null)
         })
     }
 
     const cursorSound = (poke) => {
         cursor.audioEl.current.src = require('../../assets/audios/cursor.mp3');
     }
-    
-    const addToPokeDex = (poke) => {
+
+    const addToPokeDex = (poke: Pokemon | null) => {
+        if (poke == null) return;
         poke.name = name;
-        setPokemon({})
+        setPokemon(null);
         dispatch(ActionCreators.addPokemon(poke))
         read.audioEl.current.src = require('../../assets/audios/recruit.mp3');
         setOpenDetail(false);
         setModalAddPoke(false)
     }
-    
+
     return (
         <div>
             <PokemonList open={!openDetail}>
-            <Container mt="5">
-                
+            <Container className="mt-5">
                 <Row className="mt-3 mb-3">
                     <Col sm="8">
                         <InputSearch placeholder="Name" value={nameSearch} onChange={e => setNameSearch(e.target.value)} />
@@ -117,7 +117,7 @@ const PokeList = () => {
                 </Row>
                 <Row>
                 {pokemons && pokemons.map((poke, i) => {
-                    return <PokeCard key={i} pokemon={poke} click={(n) => {detailsPokemon(n)}} select={poke.name == pokemon.name} hover={cursorSound}/>
+                    return <PokeCard key={i} pokemon={poke} click={(n) => {detailsPokemon(n)}} select={poke?.name == pokemon?.name} hover={cursorSound}/>
                 })}
                 </Row>
                 <ContainerNextPrev>
@@ -132,7 +132,7 @@ const PokeList = () => {
             </PokemonList>
             <PokemonDetails open={openDetail}>
                 <Container>
-                    {pokemon && pokemon.name && <PokeDetails pokemon={pokemon} click={() => {
+                    {pokemon && pokemon.name && <PokeDetails pokemon={pokemon} pokedex={true} click={() => {
                         setModalAddPoke(true);
                         setName(pokemon.name);
                     }} closeScreen={() => setOpenDetail(false)} />}
@@ -140,13 +140,13 @@ const PokeList = () => {
             </PokemonDetails>
             <PokeNavBar show={modalAddPoke} onHide={() => setModalAddPoke(false)} centered>
                 <Modal.Header closeButton>
-                <Modal.Title>{pokemon.name}</Modal.Title>
+                <Modal.Title>{pokemon?.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
                         <Row>
                             <Col sm="4">
-                                <img src={pokemon.sprites ? pokemon.sprites.front_default : pokemon.image} />
+                                <img src={pokemon?.sprites ? pokemon?.sprites.front_default : pokemon?.image} alt="" />
                             </Col>
                             <Col>
                                 <b>Name:</b>
@@ -163,13 +163,13 @@ const PokeList = () => {
             </PokeNavBar>
             <div className="d-none">
                 <ReactAudioPlayer
-                    ref={(element) => { read = element; }}
+                    ref={(element) => { if (element != null) read = element; }}
                     autoPlay
                     controls
                     className="audioPlayerInvisible"
                 />
                 <ReactAudioPlayer
-                    ref={(element) => { cursor = element; }}
+                    ref={(element) => { if (element != null)  cursor = element; }}
                     autoPlay
                     controls
                     className="audioPlayerInvisible"

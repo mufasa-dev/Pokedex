@@ -116,7 +116,7 @@ export const addPokemon = (state = INITIAL_STATE, action) => {
     }
 }
 
-export const rmPokemon = (state = INITIAL_STATE, action) => {
+export const rmPokemon = (state = INITIAL_STATE, action: any) => {
     let {data} = state
     if(data.some(h => h.id == action.poke.id)){
         data = data.filter(h => h.id != action.poke.id)

@@ -1,4 +1,4 @@
-export default {
+const theme = {
     title : 'fire',
     colors : {
         background: '#ff524a',
@@ -12,3 +12,5 @@ export default {
         buttonHover: '#175f7c',
     }
 };
+
+export default theme;

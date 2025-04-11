@@ -61,7 +61,7 @@ export const PokeDetails = ({pokemon, pokedex, click, closeScreen}) => {
                     </Row>
                 </Container>
             }
-            {tabSelected == 'status' && 
+            {tabSelected == 'status' &&
                 <Container>
                     {pokemon.stats.map((stat, i) => {
                         return <Row key={i}>
@@ -75,9 +75,9 @@ export const PokeDetails = ({pokemon, pokedex, click, closeScreen}) => {
                     }) }
                 </Container>
             }
-            {pokedex ? 
-                <ButtonAddRem onClick={() => {click(pokemon)}}>Remove</ButtonAddRem> 
-                : 
+            {pokedex ?
+                <ButtonAddRem onClick={() => {click(pokemon)}}>Remove</ButtonAddRem>
+                :
                 <ButtonAddRem onClick={() => {click(pokemon)}}>Add</ButtonAddRem>}
         </ContainerBody>
     )

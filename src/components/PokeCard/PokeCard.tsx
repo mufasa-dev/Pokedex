@@ -5,7 +5,7 @@ import { ContainerBody, PokeImage, PokeName, ContainerPokeType, PokeType } from 
 
 export const PokeCard = ({pokemon, select, click, hover}) => {
     return (
-         <Col sm="4" xl="2" onMouseOver={hover}>
+        <Col sm="4" xl="2" onMouseOver={hover}>
             <ContainerBody onClick={() => {click(pokemon.name)}} select={select}>
                 <PokeName>{pokemon.name}</PokeName>
                 <ContainerPokeType>

@@ -9,27 +9,27 @@ export const GET_POKEMON = gql`
                 front_default
             }
             species {
-              name
+                name
             }
             held_items {
                 item{
                     name
                 }
             }
-    		order
+            order
             height
-    		weight
+            weight
             forms {
-              name
-            }
-            location_area_encounters 
-            stats {
-              stat {
                 name
-              }
-              base_stat
-              effort
-    				}
+            }
+            location_area_encounters
+            stats {
+                stat {
+                    name
+                }
+                base_stat
+                effort
+            }
             abilities {
             ability {
                 name
