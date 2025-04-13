@@ -4,13 +4,11 @@ import {useDispatch, useSelector} from "react-redux"
 import ActionCreators from '../../redux/actionCreators'
 import { connect } from "react-redux";
 
-import { GET_POKEMON } from "../../graphql/get-pokemon";
 import { Container, Row, Col } from "react-bootstrap";
-import { InputSearch, InputSelect, ButtonSearch, PokemonDetails, PokemonList, ContainerNextPrev, PrevNextButton } from "./styles";
+import { InputSearch, InputSelect, PokemonDetails, PokemonList } from "./styles";
 import { PokeCard } from "../../components/PokeCard/PokeCard";
 import { fetchData } from "../../lib/fetchdata";
 import { GET_TYPES } from "../../graphql/get-types";
-import { PokeNav } from "../../components/PokeNav/PokeNav";
 import { PokeDetails } from "../../components/PokeDetails/PokeDetails";
 import ReactAudioPlayer from 'react-audio-player';
 
@@ -19,11 +17,8 @@ let cursor: ReactAudioPlayer;
 
 const PokeDex = () => {
     const dispatch = useDispatch()
-    const pokemons = useSelector((state: any) => state.pokemons)
-    //const [pokemons, setPokemons] = useState([]);
+    const pokemons = useSelector((state: any) => state.pokemons);
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
-    const [limit, setLimit] = useState(24);
-    const [offset, setOffset] = useState(0);
     const [name, setName] = useState('');
     const [types, setTypes] = useState<Type[]>([]);
     const [type, setType] = useState('');
@@ -45,8 +40,8 @@ const PokeDex = () => {
         }))
     }
 
-    const detailsPokemon = (nam:string) => {
-        let poke = pokemons.data.find(x => x.name == nam);
+    const detailsPokemon = (name:string) => {
+        let poke = pokemons.data.find(x => x.name === name);
         setPokemon(poke)
         read.audioEl.current.src = require('../../assets/audios/click.mp3');
         setOpenDetail(true);
@@ -62,10 +57,6 @@ const PokeDex = () => {
         read.audioEl.current.src = require('../../assets/audios/add.mp3');
         setOpenDetail(false);
     }
-
-    // const { data : { pokemons = [] } = {} } = useQuery(GET_POKEMONS, {
-    //     variables : { limit: 24, offset: 0}
-    // });
 
     return (
         <div>

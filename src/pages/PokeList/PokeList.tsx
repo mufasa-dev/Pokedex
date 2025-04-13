@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-import {useDispatch, useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
 import ActionCreators from '../../redux/actionCreators'
 import { connect } from "react-redux";
 
 import { GET_POKEMONS } from "../../graphql/get-pokemons";
 import { GET_POKEMON } from "../../graphql/get-pokemon";
-import { Container, Row, Col, Modal, Button } from "react-bootstrap";
-import { InputSearch, InputSelect, ButtonAddRem, PokeNavBar, ButtonSearch, PokemonDetails, PokemonList, ContainerNextPrev, PrevNextButton } from "./styles";
+import { Container, Row, Col, Modal } from "react-bootstrap";
+import { InputSearch, ButtonAddRem, PokeNavBar, ButtonSearch, PokemonDetails, PokemonList, ContainerNextPrev, PrevNextButton } from "./styles";
 import { PokeCard } from "../../components/PokeCard/PokeCard";
 import { fetchData } from "../../lib/fetchdata";
-import { GET_TYPES } from "../../graphql/get-types";
-import { PokeNav } from "../../components/PokeNav/PokeNav";
 import { PokeDetails } from "../../components/PokeDetails/PokeDetails";
 import ReactAudioPlayer from 'react-audio-player';
 
@@ -34,7 +32,6 @@ const PokeList = () => {
     }, [])
 
     const initial = () => {
-        
         fetchData(GET_POKEMONS, { limit: limit, offset: 0})
         .then((res => {
             setPokemons(res ? res.pokemons.results : []);
@@ -117,7 +114,7 @@ const PokeList = () => {
                 </Row>
                 <Row>
                 {pokemons && pokemons.map((poke, i) => {
-                    return <PokeCard key={i} pokemon={poke} click={(n) => {detailsPokemon(n)}} select={poke?.name == pokemon?.name} hover={cursorSound}/>
+                    return <PokeCard key={i} pokemon={poke} click={(n) => {detailsPokemon(n)}} select={poke?.name === pokemon?.name} hover={cursorSound}/>
                 })}
                 </Row>
                 <ContainerNextPrev>
