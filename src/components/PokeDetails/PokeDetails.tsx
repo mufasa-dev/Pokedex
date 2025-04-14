@@ -16,14 +16,14 @@ export const PokeDetails = ({pokemon, pokedex, click, closeScreen}) => {
             </ContainerPokeType>
             <PokeImage src={ pokemon.sprites ? pokemon.sprites.front_default : pokemon.image } />
             <NavDetailsContainer>
-                <BtnNavDetailsContainer select={tabSelected == 'about'} onClick={() => setTabSelected('about')}>
+                <BtnNavDetailsContainer select={tabSelected === 'about'} onClick={() => setTabSelected('about')}>
                     About
                 </BtnNavDetailsContainer>
-                <BtnNavDetailsContainer select={tabSelected == 'status'} onClick={() => setTabSelected('status')}>
+                <BtnNavDetailsContainer select={tabSelected === 'status'} onClick={() => setTabSelected('status')}>
                     Base Status
                 </BtnNavDetailsContainer>
             </NavDetailsContainer>
-            {tabSelected == 'about' &&
+            {tabSelected === 'about' &&
                 <Container>
                     <Row>
                         <Col xs={6} md={4}>
@@ -61,7 +61,7 @@ export const PokeDetails = ({pokemon, pokedex, click, closeScreen}) => {
                     </Row>
                 </Container>
             }
-            {tabSelected == 'status' &&
+            {tabSelected === 'status' &&
                 <Container>
                     {pokemon.stats.map((stat, i) => {
                         return <Row key={i}>
@@ -78,7 +78,7 @@ export const PokeDetails = ({pokemon, pokedex, click, closeScreen}) => {
             {pokedex ?
                 <ButtonAddRem onClick={() => {click(pokemon)}}>Remove</ButtonAddRem>
                 :
-                <ButtonAddRem onClick={() => {click(pokemon)}}>Add</ButtonAddRem>}
+                <ButtonAddRem onClick={() => {click(pokemon)}}>Add to the team</ButtonAddRem>}
         </ContainerBody>
     )
 }

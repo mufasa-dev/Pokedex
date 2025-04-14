@@ -129,7 +129,7 @@ const PokeList = () => {
             </PokemonList>
             <PokemonDetails open={openDetail}>
                 <Container>
-                    {pokemon && pokemon.name && <PokeDetails pokemon={pokemon} pokedex={true} click={() => {
+                    {pokemon && pokemon.name && <PokeDetails pokemon={pokemon} pokedex={false} click={() => {
                         setModalAddPoke(true);
                         setName(pokemon.name);
                     }} closeScreen={() => setOpenDetail(false)} />}
