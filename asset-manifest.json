@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/mufasa-dev.github.io/Pokedex/static/css/main.3ce7bc41.css",
-    "main.js": "/mufasa-dev.github.io/Pokedex/static/js/main.36916e3d.js",
-    "static/media/recruit.mp3": "/mufasa-dev.github.io/Pokedex/static/media/recruit.37eb76b214388105489e.mp3",
-    "static/media/add.mp3": "/mufasa-dev.github.io/Pokedex/static/media/add.6c442379ff9a83bd83d8.mp3",
-    "static/media/click.mp3": "/mufasa-dev.github.io/Pokedex/static/media/click.8283196cb84824eddedf.mp3",
-    "static/media/male.png": "/mufasa-dev.github.io/Pokedex/static/media/male.c926650926681c7a5d3b.png",
-    "static/media/cursor.mp3": "/mufasa-dev.github.io/Pokedex/static/media/cursor.3fac302e6313197c2c2a.mp3",
-    "index.html": "/mufasa-dev.github.io/Pokedex/index.html",
-    "main.3ce7bc41.css.map": "/mufasa-dev.github.io/Pokedex/static/css/main.3ce7bc41.css.map",
-    "main.36916e3d.js.map": "/mufasa-dev.github.io/Pokedex/static/js/main.36916e3d.js.map"
+    "main.css": "/Pokedex/static/css/main.3ce7bc41.css",
+    "main.js": "/Pokedex/static/js/main.7272473d.js",
+    "static/media/recruit.mp3": "/Pokedex/static/media/recruit.37eb76b214388105489e.mp3",
+    "static/media/add.mp3": "/Pokedex/static/media/add.6c442379ff9a83bd83d8.mp3",
+    "static/media/click.mp3": "/Pokedex/static/media/click.8283196cb84824eddedf.mp3",
+    "static/media/male.png": "/Pokedex/static/media/male.c926650926681c7a5d3b.png",
+    "static/media/cursor.mp3": "/Pokedex/static/media/cursor.3fac302e6313197c2c2a.mp3",
+    "index.html": "/Pokedex/index.html",
+    "main.3ce7bc41.css.map": "/Pokedex/static/css/main.3ce7bc41.css.map",
+    "main.7272473d.js.map": "/Pokedex/static/js/main.7272473d.js.map"
   },
   "entrypoints": [
     "static/css/main.3ce7bc41.css",
-    "static/js/main.36916e3d.js"
+    "static/js/main.7272473d.js"
   ]
 }
