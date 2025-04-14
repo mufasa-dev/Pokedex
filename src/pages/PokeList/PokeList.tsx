@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { GET_POKEMONS } from "../../graphql/get-pokemons";
 import { GET_POKEMON } from "../../graphql/get-pokemon";
 import { Container, Row, Col, Modal } from "react-bootstrap";
-import { InputSearch, ButtonAddRem, PokeNavBar, ButtonSearch, PokemonDetails, PokemonList, ContainerNextPrev, PrevNextButton } from "./styles";
+import { InputSearch, ButtonAddRem, PokeNavBar, ButtonSearch, PokemonDetails, PokemonList, ContainerNextPrev, PrevNextButton, PokeNameModal, PokeNameModalHeader } from "./styles";
 import { PokeCard } from "../../components/PokeCard/PokeCard";
 import { fetchData } from "../../lib/fetchdata";
 import { PokeDetails } from "../../components/PokeDetails/PokeDetails";
@@ -137,7 +137,7 @@ const PokeList = () => {
             </PokemonDetails>
             <PokeNavBar show={modalAddPoke} onHide={() => setModalAddPoke(false)} centered>
                 <Modal.Header closeButton>
-                <Modal.Title>{pokemon?.name}</Modal.Title>
+                <PokeNameModalHeader>{pokemon?.name}</PokeNameModalHeader>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
@@ -146,7 +146,7 @@ const PokeList = () => {
                                 <img src={pokemon?.sprites ? pokemon?.sprites.front_default : pokemon?.image} alt="" />
                             </Col>
                             <Col>
-                                <b>Name:</b>
+                                <PokeNameModal>Name:</PokeNameModal>
                                 <InputSearch type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)}/>
                             </Col>
                         </Row>

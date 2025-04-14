@@ -100,7 +100,7 @@ export const PokeNavBar = styled(Modal)`
     background-color: ${props => props.theme.colors.header};
     border: 1px solid black;
   }
-  
+
   & .modal-header{
     border-bottom: 0 !important;
   }
@@ -133,4 +133,12 @@ export const ButtonAddRem = styled.button`
   &:disabled {
     background-color: #343434;
   }
+`;
+
+export const PokeNameModal = styled.b`
+  color: white;
+`;
+
+export const PokeNameModalHeader = styled(Modal.Title)`
+  color: white;
 `;
