@@ -9,8 +9,8 @@ export const PokeNav = ({setTheme}) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="pokedex">My Team</Nav.Link>
-            <Nav.Link href="list">Pokedex</Nav.Link>
+            <Nav.Link href="#/pokedex">My Team</Nav.Link>
+            <Nav.Link href="#/list">Pokedex</Nav.Link>
           </Nav>
           <Nav>
             <NavDropdown title="Theme" id="collasible-nav-dropdown">
