@@ -1,6 +1,7 @@
 # 🎮 Pokedex
 
 This is a Pokedex application built with React that fetches data from a free GraphQL API. The application lists all Pokémon on the screen, allows users to search for specific Pokémon, change the color theme, and add Pokémon to their team.
+
 [![My Skills](https://skillicons.dev/icons?i=react,html,ts,styledcomponents,bootstrap,redux,apollo,graphql)](https://skillicons.dev)
 
 ## 🌐 Explore the Pokédex!
